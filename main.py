@@ -8,45 +8,6 @@ mp_hands = mp.solutions.hands
 mp_holistic = mp.solutions.holistic
 
 # Get real time webcam feed
-'''
-cap = cv2.VideoCapture(0)
-# Initiate holistic model
-with mp_hands.Hands(min_detection_confidence=0.5, min_tracking_confidence=0.5) as hands:
-
-    while cap.isOpened():
-        ret, frame = cap.read()
-
-        # Recolor Feed
-        image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        # Make Detections
-        results = hands.process(image)
-        # print(results.face_landmarks)
-
-        # face_landmarks, pose_landmarks, left_hand_landmarks, right_hand_landmarks
-
-        # Recolor image back to BGR for rendering
-        image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
-
-        # Draw face landmarks
-        #mp_drawing.draw_landmarks(image, results.face_landmarks, mp_holistic.FACE_CONNECTIONS)
-
-        # Right hand
-        mp_drawing.draw_landmarks(image, results.right_hand_landmarks, mp_hands.HAND_CONNECTIONS)
-
-        # Left Hand
-        mp_drawing.draw_landmarks(image, results.left_hand_landmarks, mp_hands.HAND_CONNECTIONS)
-
-        # Pose Detections
-        #mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_holistic.POSE_CONNECTIONS)
-
-        cv2.imshow('Raw Webcam Feed', image)
-
-        if cv2.waitKey(10) & 0xFF == ord('q'):
-            break
-
-cap.release()
-cv2.destroyAllWindows()
-'''
 cap = cv2.VideoCapture(0)
 with mp_hands.Hands(
         min_detection_confidence=0.5,
@@ -75,10 +36,9 @@ with mp_hands.Hands(
                     mp_hands.HAND_CONNECTIONS)
         # Flip the image horizontally for a selfie-view display.
         cv2.imshow('MediaPipe Hands', cv2.flip(image, 1))
-        if cv2.waitKey(5) & 0xFF == 27:
+        if cv2.waitKey(10) & 0xFF == ord('q'):
             break
 cap.release()
-
 
 
 
