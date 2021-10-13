@@ -7,6 +7,9 @@ mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 mp_holistic = mp.solutions.holistic
 
+#Apply styling
+mp_drawing.DrawingSpec(color=(0,0,255), thickness=2, circle_radius=2)
+
 # Get real time webcam feed
 cap = cv2.VideoCapture(0)
 with mp_hands.Hands(
@@ -33,7 +36,10 @@ with mp_hands.Hands(
                 mp_drawing.draw_landmarks(
                     image,
                     hand_landmarks,
-                    mp_hands.HAND_CONNECTIONS)
+                    mp_hands.HAND_CONNECTIONS,
+                    mp_drawing.DrawingSpec(color=(80,22,10), thickness=2, circle_radius=2),
+                    mp_drawing.DrawingSpec(color=(80,44,121), thickness=2, circle_radius=2)
+                )
         # Flip the image horizontally for a selfie-view display.
         cv2.imshow('MediaPipe Hands', cv2.flip(image, 1))
         if cv2.waitKey(10) & 0xFF == ord('q'):
