@@ -3,10 +3,10 @@ import csv
 # Number of coordinates of each hand
 num_coords = 21
 
-# Write columns name, each have x,y,z coordinate and v for visibility
+# Write columns name, each have x,y,z coordinate
 landmarks = ['class']
 for val in range(1, num_coords+1):
-    landmarks += ['x{}'.format(val), 'y{}'.format(val), 'z{}'.format(val), 'v{}'.format(val)]
+    landmarks += ['x{}'.format(val), 'y{}'.format(val), 'z{}'.format(val)]
 
 # Write 'landmarks' list to a csv
 with open('coords.csv', mode='w', newline='') as f:
