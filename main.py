@@ -15,7 +15,7 @@ mp_drawing.DrawingSpec(color=(0,0,255), thickness=2, circle_radius=2)
 cap = cv2.VideoCapture(0)
 
 # Re-run this program for each class name
-class_name = 'peace'
+class_name = 'High Five'
 
 with mp_hands.Hands(
         min_detection_confidence=0.5,
@@ -39,6 +39,13 @@ with mp_hands.Hands(
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
                 # Export coordinates
+                mp_drawing.draw_landmarks(
+                    image,
+                    hand_landmarks,
+                    mp_hands.HAND_CONNECTIONS,
+                    mp_drawing.DrawingSpec(color=(80,22,10), thickness=2, circle_radius=2),
+                    mp_drawing.DrawingSpec(color=(80,44,121), thickness=2, circle_radius=2)
+                )
                 try:
                     # Extract hand landmarks to list
                     hand = results.hand_landmarks.landmark
@@ -51,17 +58,11 @@ with mp_hands.Hands(
                     with open('coords.csv', mode='a', newline='') as f:
                         csv_writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                         csv_writer.writerow(hand_row)
+                    print('SUCCEEEEED')
 
                 except:
                     pass
 
-                mp_drawing.draw_landmarks(
-                    image,
-                    hand_landmarks,
-                    mp_hands.HAND_CONNECTIONS,
-                    mp_drawing.DrawingSpec(color=(80,22,10), thickness=2, circle_radius=2),
-                    mp_drawing.DrawingSpec(color=(80,44,121), thickness=2, circle_radius=2)
-                )
         # Flip the image horizontally for a selfie-view display.
         cv2.imshow('MediaPipe Hands', cv2.flip(image, 1))
         if cv2.waitKey(10) & 0xFF == ord('q'):
