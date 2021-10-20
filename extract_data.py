@@ -50,7 +50,7 @@ with mp_hands.Hands(
 
                 # Extract hand landmarks to list
                 hand = hand_landmarks.landmark
-                hand_row = list(np.array([[landmark.x, landmark.y, landmark.z, landmark.visibility] for landmark in hand]).flatten())
+                hand_row = list(np.array([[landmark.x, landmark.y, landmark.z] for landmark in hand]).flatten())
 
                 # Append class name
                 hand_row.insert(0, class_name)
