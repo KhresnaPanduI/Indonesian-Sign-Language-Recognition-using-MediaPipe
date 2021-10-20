@@ -1,5 +1,5 @@
 import pickle
-import  cv2
+import cv2
 import numpy as np
 import mediapipe as mp
 import pandas as pd
@@ -12,8 +12,8 @@ mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 mp_holistic = mp.solutions.holistic
 
-#Apply styling
-mp_drawing.DrawingSpec(color=(0,0,255), thickness=2, circle_radius=2)
+# Apply styling
+mp_drawing.DrawingSpec(color=(0, 0, 255), thickness=2, circle_radius=2)
 
 # Get real time webcam feed
 cap = cv2.VideoCapture(0)
@@ -45,8 +45,8 @@ with mp_hands.Hands(
                     image,
                     hand_landmarks,
                     mp_hands.HAND_CONNECTIONS,
-                    mp_drawing.DrawingSpec(color=(80,22,10), thickness=2, circle_radius=2),
-                    mp_drawing.DrawingSpec(color=(80,44,121), thickness=2, circle_radius=2)
+                    mp_drawing.DrawingSpec(color=(80, 22, 10), thickness=2, circle_radius=2),
+                    mp_drawing.DrawingSpec(color=(80, 44, 121), thickness=2, circle_radius=2)
                 )
 
                 # Extract hand landmarks to list
@@ -60,7 +60,7 @@ with mp_hands.Hands(
                 print(sign_language_class, sign_language_prob)
 
                 # Get status box
-                cv2.rectangle(image, (0,0), (250, 60), (245, 117, 16), -1)
+                cv2.rectangle(image, (0, 0), (250, 60), (245, 117, 16), -1)
 
                 # Display class
                 cv2.putText(image, 'CLASS', (95, 12), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv2.LINE_AA)
@@ -68,12 +68,9 @@ with mp_hands.Hands(
                             cv2.FONT_HERSHEY_SIMPLEX, -1, (255, 255, 255), 2, cv2.LINE_AA)
 
                 # Display probability
-                cv2.putText(image, 'PROB', (15,12), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv2.LINE_AA)
-                cv2.putText(image, str(round(sign_language_prob[np.argmax(sign_language_prob)],2)), (10, 40),
+                cv2.putText(image, 'PROB', (15, 12), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv2.LINE_AA)
+                cv2.putText(image, str(round(sign_language_prob[np.argmax(sign_language_prob)], 2)), (10, 40),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 2, cv2.LINE_AA))
-
-
-
 
         # Flip the image horizontally for a selfie-view display.
         cv2.imshow('MediaPipe Hands', cv2.flip(image, 1))
