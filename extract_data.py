@@ -51,18 +51,14 @@ with mp_hands.Hands(
                 # Extract hand landmarks to list
                 hand = hand_landmarks.landmark
                 hand_row = list(np.array([[landmark.x, landmark.y, landmark.z, landmark.visibility] for landmark in hand]).flatten())
-                print(hand)
+
                 # Append class name
                 hand_row.insert(0, class_name)
 
                 # Export to CSV
-                #with open('coords.csv', mode='a', newline='') as f:
-                #    csv_writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-                #    csv_writer.writerow(hand_row)
-            print('==============================')
-            with open('coords.csv', mode='a', newline='') as f:
-                csv_writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-                csv_writer.writerow(hand_row)
+                with open('coords.csv', mode='a', newline='') as f:
+                   csv_writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+                   csv_writer.writerow(hand_row)
 
         # Flip the image horizontally for a selfie-view display.
         cv2.imshow('MediaPipe Hands', cv2.flip(image, 1))
