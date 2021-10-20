@@ -12,3 +12,4 @@ for val in range(1, num_coords+1):
 with open('coords.csv', mode='w', newline='') as f:
     csv_writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
     csv_writer.writerow(landmarks)
+    csv_writer.writerow('change hands')#kolom terakhir untuk membedakan 2 tangan
