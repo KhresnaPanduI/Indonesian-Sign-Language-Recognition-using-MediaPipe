@@ -11,9 +11,9 @@ Recognize Indonesian Sign Language with MediaPipe Framework.
 6. Predict the class with captured coordinates using the saved model on predict.py.
 
 ### Requirement
-1.     Python 3.8
-2.     MediaPipe
-3.     \item Bahasa Pemrograman: Python 3.8
-    \item IDE: PyCharm 21.1.3
-    \item Kerangka kerja: MediaPipe 0.8.8
-    \item Pustaka: Pandas 1.3.4, Numpy 1.21.2, OpenCV 4.5.3.56, scikit-learn 1.0
+1. Python 3.8
+2. MediaPipe 0.8.8
+3. Pandas 1.3.4
+4. Numpy 1.21.2
+5. OpenCV 4.5.3.56
+6. scikit-learn 1.0
