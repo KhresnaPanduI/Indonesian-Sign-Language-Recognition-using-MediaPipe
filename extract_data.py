@@ -17,10 +17,10 @@ mp_drawing.DrawingSpec(color=(0,0,255), thickness=2, circle_radius=2)
 cap = cv2.VideoCapture(2)
 
 # Re-run this program for each class name
-class_name = 'O'
+class_name = 'U'
 
 # Number of data to take
-max_data = 1000
+max_data = 500
 count = 0
 
 with mp_hands.Hands(
@@ -76,7 +76,7 @@ with mp_hands.Hands(
         if cv2.waitKey(10) & 0xFF == ord('q'):
             break
         # if maximum amount of data reached, break the loop
-        if count == max_data:
+        if count >= max_data:
             break
 cap.release()
 
