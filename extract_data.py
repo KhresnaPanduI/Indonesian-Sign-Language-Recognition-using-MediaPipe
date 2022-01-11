@@ -17,6 +17,10 @@ cap = cv2.VideoCapture(0)
 # Re-run this program for each class name
 class_name = 'Three'
 
+# Number of data to take
+max_data = 300
+count = 0
+
 with mp_hands.Hands(
         min_detection_confidence=0.5,
         min_tracking_confidence=0.5) as hands:
@@ -60,9 +64,16 @@ with mp_hands.Hands(
                    csv_writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                    csv_writer.writerow(hand_row)
 
+                # Take exactly 250 data
+                count += 1
+
         # Flip the image horizontally for a selfie-view display.
         cv2.imshow('MediaPipe Hands', cv2.flip(image, 1))
+        # Press 'Q' to stop extracting
         if cv2.waitKey(10) & 0xFF == ord('q'):
+            break
+
+        if count == max_data:
             break
 cap.release()
 
