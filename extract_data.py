@@ -15,7 +15,7 @@ mp_drawing.DrawingSpec(color=(0,0,255), thickness=2, circle_radius=2)
 cap = cv2.VideoCapture(0)
 
 # Re-run this program for each class name
-class_name = 'One'
+class_name = 'Three'
 
 with mp_hands.Hands(
         min_detection_confidence=0.5,
