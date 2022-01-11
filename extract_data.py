@@ -17,7 +17,7 @@ mp_drawing.DrawingSpec(color=(0,0,255), thickness=2, circle_radius=2)
 cap = cv2.VideoCapture(2)
 
 # Re-run this program for each class name
-class_name = 'U'
+class_name = 'Y'
 
 # Number of data to take
 max_data = 500
