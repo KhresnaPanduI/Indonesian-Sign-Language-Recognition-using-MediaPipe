@@ -12,13 +12,15 @@ mp_holistic = mp.solutions.holistic
 mp_drawing.DrawingSpec(color=(0,0,255), thickness=2, circle_radius=2)
 
 # Get real time webcam feed
-cap = cv2.VideoCapture(0)
+# 0 for default laptop webcam
+# 2 for dbE C200
+cap = cv2.VideoCapture(2)
 
 # Re-run this program for each class name
-class_name = 'Three'
+class_name = 'O'
 
 # Number of data to take
-max_data = 300
+max_data = 1000
 count = 0
 
 with mp_hands.Hands(
@@ -64,15 +66,16 @@ with mp_hands.Hands(
                    csv_writer = csv.writer(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                    csv_writer.writerow(hand_row)
 
-                # Take exactly 250 data
+                # counting how much data is taken
                 count += 1
+                print(count)
 
         # Flip the image horizontally for a selfie-view display.
         cv2.imshow('MediaPipe Hands', cv2.flip(image, 1))
         # Press 'Q' to stop extracting
         if cv2.waitKey(10) & 0xFF == ord('q'):
             break
-
+        # if maximum amount of data reached, break the loop
         if count == max_data:
             break
 cap.release()
