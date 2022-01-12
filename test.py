@@ -7,4 +7,4 @@ dic = {
     'rf':2
 }
 
-print(dic['lr'])
+print('contoh:', dic['lr'])

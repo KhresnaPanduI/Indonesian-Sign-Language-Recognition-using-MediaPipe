@@ -31,22 +31,41 @@ param_RF = {}
 param_RF['rf__n_estimators'] = [25, 50, 100, 150, 200]
 
 param_LR = {}
-param_LR['lr__max_iter'] = [600, 800, 1000, 1200]
-param_LR['lr__penalty'] = ['l2', 'none']
+param_LR['lr__max_iter'] = [100, 250, 500, 1000]
+#param_LR['lr__penalty'] = ['l2', 'none']
 
 # Creating Gridsearch for each model
 gs_rf = GridSearchCV(rf_pipe,
                      param_RF,
                      cv=5,
-                     verbose=2)
+                     verbose=2,
+                     scoring='accuracy')
 gs_rf = gs_rf.fit(X_train, y_train)
 
 gs_lr = GridSearchCV(lr_pipe,
                      param_LR,
                      cv=5,
-                     verbose=2)
+                     verbose=2,
+                     scoring='accuracy')
 gs_lr = gs_lr.fit(X_train, y_train)
 
+# evaluate model
+
+rf_best_parameters = gs_rf.best_params_
+rf_best_accuracy = gs_rf.best_score_
+
+lr_best_parameters = gs_lr.best_params_
+lr_best_accuracy = gs_rf.best_score_
+
+print('rf best parameters: ', rf_best_parameters)
+print('rf best accuracy: ', rf_best_accuracy)
+print('lr best paramaters: ', lr_best_parameters)
+print('lr best accuracy: ', lr_best_accuracy)
+
+# save best model
+import joblib
+joblib.dump(gs_rf.best_estimator_, 'randomForest.pkl')
+joblib.dump(gs_lr.best_estimator_, 'logisticRegression.pkl')
 '''
 fit_models = {}
 for algo, pipeline in pipelines.items():
