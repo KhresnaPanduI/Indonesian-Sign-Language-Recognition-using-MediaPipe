@@ -5,8 +5,10 @@ import mediapipe as mp
 import pandas as pd
 
 # Load Random Forest model
-with open('RandomForest.pkl', 'rb') as f:
-    model = pickle.load(f)
+#with open('LogisticRegression.pkl', 'rb') as f:
+#    model = pickle.load(f)
+import joblib
+model = joblib.load('LogisticRegression.pkl')
 
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands

@@ -28,10 +28,10 @@ lr_pipe = Pipeline([
 
 # Initiaze the hyperparameters for each dictionary
 param_RF = {}
-param_RF['rf__n_estimators'] = [25, 50, 100, 150, 200]
+param_RF['rf__n_estimators'] = [10, 25, 50, 100, 250, 500, 750, 1000]
 
 param_LR = {}
-param_LR['lr__max_iter'] = [100, 250, 500, 1000]
+param_LR['lr__max_iter'] = [50, 100, 250, 500, 750, 1000, 1250, 1500]
 #param_LR['lr__penalty'] = ['l2', 'none']
 
 # Creating Gridsearch for each model
@@ -50,15 +50,22 @@ gs_lr = GridSearchCV(lr_pipe,
 gs_lr = gs_lr.fit(X_train, y_train)
 
 # evaluate model
-
+rf_acc = pd.DataFrame({'param': gs_rf.cv_results_["params"], 'acc': gs_rf.cv_results_["mean_test_score"]})
+rf_acc.to_csv('akurasi random forest.csv')
 rf_best_parameters = gs_rf.best_params_
 rf_best_accuracy = gs_rf.best_score_
 
+lr_acc = pd.DataFrame({'param': gs_lr.cv_results_["params"], 'acc': gs_lr.cv_results_["mean_test_score"]})
+lr_acc.to_csv('akurasi logistic regression.csv')
 lr_best_parameters = gs_lr.best_params_
 lr_best_accuracy = gs_rf.best_score_
 
+print('rf all models accuracy: \n', rf_acc)
+print()
 print('rf best parameters: ', rf_best_parameters)
 print('rf best accuracy: ', rf_best_accuracy)
+print('lr all models accuracy: \n', lr_acc)
+print()
 print('lr best paramaters: ', lr_best_parameters)
 print('lr best accuracy: ', lr_best_accuracy)
 
