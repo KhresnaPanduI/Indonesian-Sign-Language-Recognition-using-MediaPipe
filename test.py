@@ -17,3 +17,6 @@ print(res['lr'])
 print(dic)
 print(type(dic))
 print('contoh:', dic['lr'])
+
+dflr = pd.read_csv('akurasi logistic regression.csv')
+print(dflr)

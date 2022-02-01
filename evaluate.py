@@ -21,4 +21,17 @@ ax.set(xlabel='Number of Trees', ylabel='Validation Accuracy')
 plt.show()
 ax.figure.savefig('Random Forest.png')
 
+df_lr = pd.read_csv('akurasi logistic regression.csv')
 
+# Change 'lr__max_iter' to only its value
+for i in range(df_lr.shape[0]):
+    iter = df_lr['param'][i]
+    res = iter.replace("'", "\"")
+    res = json.loads(res)
+    df_lr.at[i,'param'] = res['lr__max_iter']
+
+#sns.set()
+#ax_lr = sns.lineplot(data=df_lr, x= 'param', y = 'acc')
+#ax_lr.set(xlabel='Maximum Iterations', ylabel='Validation Accuracy')
+#plt.show()
+#ax_lr.figure.savefig('Logistic Regression.png')
