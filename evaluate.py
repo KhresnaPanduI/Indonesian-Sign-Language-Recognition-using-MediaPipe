@@ -19,5 +19,6 @@ sns.set()
 ax = sns.lineplot(data=df, x= 'param', y = 'acc')
 ax.set(xlabel='Number of Trees', ylabel='Validation Accuracy')
 plt.show()
+ax.figure.savefig('Random Forest.png')
 
 
