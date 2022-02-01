@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import json
 
+# Random forest visualization
 df = pd.read_csv('akurasi random forest.csv')
 
 # Change 'rf__n_estimators' to only its value
