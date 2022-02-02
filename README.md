@@ -18,3 +18,6 @@ Recognize Indonesian Sign Language with MediaPipe Framework.
 4. Numpy 1.21.2
 5. OpenCV 4.5.3.56
 6. scikit-learn 1.0
+7. Matplotlib
+8. Seaborn 
+
