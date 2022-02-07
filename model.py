@@ -73,6 +73,10 @@ print('lr best accuracy: ', lr_best_accuracy)
 import joblib
 joblib.dump(gs_rf.best_estimator_, 'randomForest.pkl')
 joblib.dump(gs_lr.best_estimator_, 'logisticRegression.pkl')
+
+# export X_test, y_test as csv to be evaluate later on in evaluate.py
+X_test.to_csv('X test.csv')
+y_test.to_csv('y test.csv')
 '''
 fit_models = {}
 for algo, pipeline in pipelines.items():
