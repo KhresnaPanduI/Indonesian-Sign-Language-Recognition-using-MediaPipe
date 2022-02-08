@@ -5,8 +5,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import GridSearchCV
-from sklearn.metrics import accuracy_score
-import pickle
 
 df = pd.read_csv('coords.csv')
 X = df.drop('class', axis=1)  # features
@@ -28,26 +26,32 @@ lr_pipe = Pipeline([
 
 # Initiaze the hyperparameters for each dictionary
 param_RF = {}
-param_RF['rf__n_estimators'] = [10, 25, 50, 100, 250, 500, 750, 1000]
+param_RF['rf__n_estimators'] = [10, 25, 50]
 
-param_LR = {}
-param_LR['lr__max_iter'] = [50, 100, 250, 500, 750, 1000, 1250, 1500]
+param_LR = [
+    {'lr__penalty': ['l1'],
+     'lr__solver': ['liblinear'],
+     'lr__max_iter': [50, 100, 250]},
+    {'lr__solver': ['lbfgs'],
+     'lr__max_iter': [50, 100, 250]}
+]
+#param_LR['lr__max_iter'] = [50, 100, 250, 500, 750, 1000, 1250, 1500]
 #param_LR['lr__penalty'] = ['l2', 'none']
 
 # Creating Gridsearch for each model
-gs_rf = GridSearchCV(rf_pipe,
-                     param_RF,
-                     cv=5,
-                     verbose=2,
-                     scoring='accuracy')
-gs_rf = gs_rf.fit(X_train, y_train)
-
 gs_lr = GridSearchCV(lr_pipe,
                      param_LR,
                      cv=5,
                      verbose=2,
                      scoring='accuracy')
 gs_lr = gs_lr.fit(X_train, y_train)
+
+gs_rf = GridSearchCV(rf_pipe,
+                     param_RF,
+                     cv=5,
+                     verbose=2,
+                     scoring='accuracy')
+gs_rf = gs_rf.fit(X_train, y_train)
 
 # evaluate model
 rf_acc = pd.DataFrame({'param': gs_rf.cv_results_["params"], 'acc': gs_rf.cv_results_["mean_test_score"]})

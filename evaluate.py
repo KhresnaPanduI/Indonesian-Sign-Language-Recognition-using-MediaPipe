@@ -6,8 +6,8 @@ import pickle
 from sklearn.metrics import plot_confusion_matrix
 
 # Load test data
-X_test = pd.read_csv('X_test.csv')
-y_test = pd.read_csv('y_test.csv')
+X_test = pd.read_csv('X test.csv')
+y_test = pd.read_csv('y test.csv')
 
 '''
 Random forest evaluation
