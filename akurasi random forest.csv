@@ -1,4 +1,9 @@
 ,param,acc
-0,{'rf__n_estimators': 10},0.9450520833333333
-1,{'rf__n_estimators': 25},0.9637499999999999
-2,{'rf__n_estimators': 50},0.965625
+0,{'rf__n_estimators': 10},0.9466666666666667
+1,{'rf__n_estimators': 25},0.9634375000000001
+2,{'rf__n_estimators': 50},0.9671875
+3,{'rf__n_estimators': 100},0.9699479166666667
+4,{'rf__n_estimators': 250},0.9711458333333333
+5,{'rf__n_estimators': 500},0.97171875
+6,{'rf__n_estimators': 750},0.9719791666666667
+7,{'rf__n_estimators': 1000},0.97171875

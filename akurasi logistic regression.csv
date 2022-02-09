@@ -1,7 +1,11 @@
 ,param,acc
-0,"{'lr__max_iter': 50, 'lr__penalty': 'l1', 'lr__solver': 'liblinear'}",0.9573958333333333
-1,"{'lr__max_iter': 100, 'lr__penalty': 'l1', 'lr__solver': 'liblinear'}",0.9575520833333334
+0,"{'lr__max_iter': 50, 'lr__penalty': 'l1', 'lr__solver': 'liblinear'}",0.95734375
+1,"{'lr__max_iter': 100, 'lr__penalty': 'l1', 'lr__solver': 'liblinear'}",0.9574999999999999
 2,"{'lr__max_iter': 250, 'lr__penalty': 'l1', 'lr__solver': 'liblinear'}",0.9574999999999999
-3,"{'lr__max_iter': 50, 'lr__solver': 'lbfgs'}",0.94015625
-4,"{'lr__max_iter': 100, 'lr__solver': 'lbfgs'}",0.9574479166666666
-5,"{'lr__max_iter': 250, 'lr__solver': 'lbfgs'}",0.9604166666666666
+3,"{'lr__max_iter': 500, 'lr__penalty': 'l1', 'lr__solver': 'liblinear'}",0.9574999999999999
+4,"{'lr__max_iter': 750, 'lr__penalty': 'l1', 'lr__solver': 'liblinear'}",0.9574479166666666
+5,"{'lr__max_iter': 50, 'lr__solver': 'lbfgs'}",0.94015625
+6,"{'lr__max_iter': 100, 'lr__solver': 'lbfgs'}",0.9574479166666666
+7,"{'lr__max_iter': 250, 'lr__solver': 'lbfgs'}",0.9604166666666666
+8,"{'lr__max_iter': 500, 'lr__solver': 'lbfgs'}",0.9607291666666666
+9,"{'lr__max_iter': 750, 'lr__solver': 'lbfgs'}",0.9607812499999999
