@@ -64,15 +64,36 @@ print('Logistic Regression test accuracy: ', lr_result)
 
 df_lr = pd.read_csv('akurasi logistic regression.csv')
 
-# Change 'lr__max_iter' to only its value
-for i in range(df_lr.shape[0]):
-    iter = df_lr['param'][i]
+# split dataframe one for l1 regularisation another for l2
+df_lr1 = df_lr.iloc[:4,:]
+df_lr2 = df_lr.iloc[5:,:]
+
+# Change 'lr__max_iter' to only its value for l1
+for i in range(df_lr1.shape[0]):
+    iter = df_lr1['param'][i]
     res = iter.replace("'", "\"")
     res = json.loads(res)
-    df_lr.at[i, 'param'] = res['lr__max_iter']
+    df_lr1.at[i, 'param'] = res['lr__max_iter']
 
+# Plot for l1
+#sns.set()
+#ax_lr = sns.lineplot(data=df_lr1, x='param', y='acc')
+#ax_lr.set(xlabel='Maximum Iterations', ylabel='Validation Accuracy')
+#plt.show()
+#ax_lr.figure.savefig('Logistic Regression l1.png', bbox_inches = 'tight')
+
+# Change 'lr__max_iter' to only its value for l2
+for i in range(df_lr2.shape[0]):
+    i = i + 5 # because index start from 5
+    iter = df_lr2['param'][i]
+    res = iter.replace("'", "\"")
+    res = json.loads(res)
+    df_lr2.at[i, 'param'] = res['lr__max_iter']
+
+# plot for l2
 sns.set()
-ax_lr = sns.lineplot(data=df_lr, x='param', y='acc')
+ax_lr = sns.lineplot(data=df_lr2, x='param', y='acc')
 ax_lr.set(xlabel='Maximum Iterations', ylabel='Validation Accuracy')
 plt.show()
-ax_lr.figure.savefig('Logistic Regression.png')
+ax_lr.figure.savefig('Logistic Regression l2.png', bbox_inches = 'tight')
+
