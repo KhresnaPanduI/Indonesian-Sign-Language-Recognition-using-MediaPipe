@@ -26,17 +26,15 @@ lr_pipe = Pipeline([
 
 # Initiaze the hyperparameters for each dictionary
 param_RF = {}
-param_RF['rf__n_estimators'] = [10, 25, 50]
+param_RF['rf__n_estimators'] = [10, 25, 50, 100, 250, 500, 750, 1000]
 
 param_LR = [
     {'lr__penalty': ['l1'],
      'lr__solver': ['liblinear'],
-     'lr__max_iter': [50, 100, 250]},
+     'lr__max_iter': [50, 100, 250, 500, 750]},
     {'lr__solver': ['lbfgs'],
-     'lr__max_iter': [50, 100, 250]}
+     'lr__max_iter': [50, 100, 250, 500, 750]}
 ]
-#param_LR['lr__max_iter'] = [50, 100, 250, 500, 750, 1000, 1250, 1500]
-#param_LR['lr__penalty'] = ['l2', 'none']
 
 # Creating Gridsearch for each model
 gs_lr = GridSearchCV(lr_pipe,
