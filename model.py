@@ -81,23 +81,4 @@ joblib.dump(gs_lr.best_estimator_, 'logisticRegression.pkl')
 # export X_test, y_test as csv to be evaluate later on in evaluate.py
 X_test.to_csv('X test.csv')
 y_test.to_csv('y test.csv')
-'''
-fit_models = {}
-for algo, pipeline in pipelines.items():
-    model = pipeline.fit(X_train, y_train)
-    fit_models[algo] = model
 
-# Evaluate models
-for algo, model in fit_models.items():
-    y_pred = model.predict(X_test)
-    print(algo, accuracy_score(y_test, y_pred))
-
-# Save models in pickle format
-def save_model(name, model):
-    with open(name, 'wb') as f:
-        pickle.dump(model, f)
-
-
-save_model('RandomForest.pkl', fit_models['rf'])
-save_model('LogisticRegression.pkl', fit_models['lr'])
-'''
