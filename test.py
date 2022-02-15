@@ -1,22 +1,11 @@
-import pandas as pd
-import json
-df = pd.read_csv('coords.csv')
-print(sum(df['class']=='V'))
+import cv2
+cap = cv2.VideoCapture(0)
+while True:
 
-dic = {
-    'lr':1
-}
-dicstr = "{'lr':1}"
-print(dicstr)
-print(type(dicstr))
-dicstr = dicstr.replace("'", "\"")
-res = json.loads(dicstr)
-print(res)
-print(type(res))
-print(res['lr'])
-print(dic)
-print(type(dic))
-print('contoh:', dic['lr'])
+    ret, frame = cap.read()
+    cv2.imshow('frame',frame)
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
 
-dflr = pd.read_csv('akurasi logistic regression.csv')
-print(dflr)
+cap.release()
+cv2.destroyAllWindows()

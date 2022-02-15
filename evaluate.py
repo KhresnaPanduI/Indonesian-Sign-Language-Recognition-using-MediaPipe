@@ -1,4 +1,4 @@
-from sklearn.metrics import ConfusionMatrixDisplay
+from sklearn.metrics import ConfusionMatrixDisplay, confusion_matrix
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
@@ -25,10 +25,10 @@ rf_result = rf_model.score(X_test, y_test)
 # Print accuracy and plot confusion matrix
 print('Random Forest test accuracy: ', rf_result)
 
-#fig, ax = plt.subplots(figsize=(8,8))
-#cmp = ConfusionMatrixDisplay.from_estimator(rf_model, X_test, y_test, cmap='Blues', ax=ax)
-#plt.savefig('Random Forest Confusion Matrix.png', bbox_inches='tight', dpi=300)
-#plt.show()
+fig, ax = plt.subplots(figsize=(8,8))
+cmp = ConfusionMatrixDisplay.from_estimator(rf_model, X_test, y_test, cmap='Blues', ax=ax)
+plt.savefig('Random Forest Confusion Matrix.png', bbox_inches='tight', dpi=300)
+plt.show()
 
 # Visualization for validation accuracy
 df = pd.read_csv('akurasi random forest.csv')
@@ -91,9 +91,85 @@ for i in range(df_lr2.shape[0]):
     df_lr2.at[i, 'param'] = res['lr__max_iter']
 
 # plot for l2
-sns.set()
-ax_lr = sns.lineplot(data=df_lr2, x='param', y='acc')
-ax_lr.set(xlabel='Maximum Iterations', ylabel='Validation Accuracy')
-plt.show()
-ax_lr.figure.savefig('Logistic Regression l2.png', bbox_inches = 'tight')
+#sns.set()
+#ax_lr = sns.lineplot(data=df_lr2, x='param', y='acc')
+#ax_lr.set(xlabel='Maximum Iterations', ylabel='Validation Accuracy')
+#plt.show()
+#ax_lr.figure.savefig('Logistic Regression l2.png', bbox_inches = 'tight')
 
+# function to calculate TP, FP, TN, FN
+def perf_measure(y_actual, y_hat):
+    TP = 0
+    FP = 0
+    TN = 0
+    FN = 0
+
+    for i in range(len(y_hat)):
+        if y_actual[i]==y_hat[i]==1:
+            TP += 1
+        if y_hat[i]==1 and y_actual[i]!=y_hat[i]:
+            FP += 1
+        if y_actual[i]==y_hat[i]==0:
+            TN += 1
+        if y_hat[i]==0 and y_actual[i]!=y_hat[i]:
+            FN += 1
+
+    return(TP, FP, TN, FN)
+
+# confusion matrix for random forest model
+y_pred = rf_model.predict(X_test)
+rf_cm = confusion_matrix(y_test, y_pred)
+#print(rf_cm)
+print('==============================')
+print('Akurasi Random Forest')
+print(rf_cm.diagonal()/rf_cm.sum(axis=1))
+
+for i in range(0, len(rf_cm[0])):
+    print('Akurasi kelas-{} = {}'.format(i+1, rf_cm[i][i]/sum(rf_cm[i])))
+
+import numpy as np
+FP = rf_cm.sum(axis=0) - np.diag(rf_cm)
+FN = rf_cm.sum(axis=1) - np.diag(rf_cm)
+TP = np.diag(rf_cm)
+TN = rf_cm.sum() - (FP + FN + TP)
+
+print('rf_cm.sum: ', rf_cm.sum())
+print('sum(rf_cm): ', sum(rf_cm))
+# Sensitivity, hit rate, recall, or true positive rate
+TPR = TP/(TP+FN)
+# Specificity or true negative rate
+TNR = TN/(TN+FP)
+# Precision or positive predictive value
+PPV = TP/(TP+FP)
+# Negative predictive value
+NPV = TN/(TN+FN)
+# Fall out or false positive rate
+FPR = FP/(FP+TN)
+# False negative rate
+FNR = FN/(TP+FN)
+# False discovery rate
+FDR = FP/(TP+FP)
+
+print('True Positive: ', TP)
+print('False Positive: ', FP)
+print('True Negative: ', TN)
+print('False Negative: ', FN)
+
+from sklearn import metrics
+print(metrics.classification_report(y_test, y_pred, digits=4))
+
+# confusion matrix for logistic regression model
+
+lr_y_pred = lr_model.predict(X_test)
+lr_cm = confusion_matrix(y_test, lr_y_pred)
+#print(lr_cm)
+print('==============================')
+print('Akurasi Logistic Regression')
+print(lr_cm.diagonal()/lr_cm.sum(axis=1))
+
+for i in range(0, len(lr_cm[0])):
+    print('Akurasi kelas-{} = {}'.format(i+1, lr_cm[i][i]/sum(lr_cm[i])))
+
+print('jumlah benar kelas 19', lr_cm[18][18])
+print('jumlah total kelas 19', sum(lr_cm[18]))
+print('total/jumlah benar: ', lr_cm[18][18]/sum(lr_cm[18]))

@@ -20,7 +20,7 @@ mp_drawing.DrawingSpec(color=(0, 0, 255), thickness=2, circle_radius=2)
 # Get real time webcam feed
 # 0 for default laptop webcam
 # 2 for dbE C200
-cap = cv2.VideoCapture(2)
+cap = cv2.VideoCapture(0)
 
 
 with mp_hands.Hands(
