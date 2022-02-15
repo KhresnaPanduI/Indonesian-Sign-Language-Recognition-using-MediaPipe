@@ -1,6 +1,6 @@
 # Indonesian-Sign-Language-Recognition-using-MediaPipe
 
-Recognize Indonesian Sign Language with MediaPipe Framework.
+Recognize 24 Indonesian Sign Language Alphabets at real time using MediaPipe Framework.
 
 ## Project workflow
 1. Create empty CSV file with the header on create_csv.py
